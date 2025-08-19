@@ -4,6 +4,27 @@
 
 You have been given a transaction classification system with missing implementations. Your task is to complete **two main tasks** to make the system fully functional.
 
+## 🚀 Quick Start Guide
+
+### Option 1: Instant Docker Test (Recommended)
+```bash
+# Test if everything works immediately
+./docker-run.sh test
+```
+
+### Option 2: Local Development Setup
+```bash
+# Install dependencies
+npm install
+
+# Run tests to see what needs to be implemented
+npm test
+```
+
+**Choose Docker if you don't have Node.js installed locally - it's the fastest way to get started!**
+
+---
+
 ## Task 1: Implement Basic Classification
 
 **File:** `src/classifier.ts`  
@@ -164,4 +185,3 @@ npm start classify-ai -- --title "Flight to Paris" --amount 1200
 
 Take your time to understand the requirements and implement both tasks. The existing code structure, helper methods, and tests should guide you to the correct implementation.
 
-**Pro Tip:** Use Docker if you don't have Node.js installed locally - it's the easiest way to get started!
