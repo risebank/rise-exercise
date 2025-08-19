@@ -4,10 +4,11 @@ services:
       context: .
       dockerfile: Dockerfile
     volumes:
-      # Mount source code for live reloading
+      # Mount source code for live reloading (only source files, not package files)
       - ./src:/app/src:ro
-      - ./package*.json:/app/package*.json:ro
       - ./tsconfig.json:/app/tsconfig.json:ro
+      - ./package.json:/app/package.json:ro
+      - ./package-lock.json:/app/package-lock.json:ro
     environment:
       - NODE_ENV=development
     # Override the CMD to use tsx watch for development
