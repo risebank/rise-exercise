@@ -19,7 +19,7 @@ You have been given a transaction classification system with missing implementat
 
 ### Implementation Hints
 
-- Create `findCategory()` helper method to determine the category
+- Create `findCategory()` helper method to determine the category. Pick first category with at least one matching keyword.
 - Use the existing `calculateRiskLevel()` helper method to determine risk level
 - The method should call both helpers and return the result
 
@@ -122,7 +122,7 @@ Once implemented, you can test both classification methods:
 ### Basic Classification
 ```bash
 # Local usage
-npm start classify --title "Flight to Paris" --amount 1200
+npm start classify -- --title "Flight to Paris" --amount 1200
 
 # Docker usage
 ./docker-run.sh classify "Hotel booking" 300
@@ -131,7 +131,7 @@ npm start classify --title "Flight to Paris" --amount 1200
 ### AI Classification
 ```bash
 # Local usage
-npm start classify-ai --title "Flight to Paris" --amount 1200
+npm start classify-ai -- --title "Flight to Paris" --amount 1200
 
 # Docker usage
 ./docker-run.sh classify-ai "Restaurant dinner" 85

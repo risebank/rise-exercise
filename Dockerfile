@@ -7,17 +7,11 @@ WORKDIR /app
 # Copy package files
 COPY package*.json ./
 
-# Install all dependencies temporarily (including dev dependencies for building)
+# Install all dependencies (including dev dependencies for tsx)
 RUN npm ci
 
 # Copy source code
 COPY . .
-
-# Build the project
-RUN npm run build
-
-# Remove dev dependencies to create a smaller production image
-RUN npm ci --only=production
 
 # Create a non-root user
 RUN addgroup -g 1001 -S nodejs
@@ -30,5 +24,5 @@ USER nodejs
 # Expose port (if needed for future web interface)
 EXPOSE 3000
 
-# Default command - keep container running
-CMD ["sh", "-c", "echo 'Container is ready. Use docker-compose exec to run commands.' && tail -f /dev/null"]
+# Default command - run with tsx directly
+CMD ["npx", "tsx", "src/index.ts"]

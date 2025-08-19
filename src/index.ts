@@ -85,7 +85,7 @@ program
       console.log('💡 Please implement the classifyAI method in src/classifier.ts');
       
       // For now, use rule-based classification
-      const result = await classifier.classifyAnthropic(transaction);
+      const result = await classifier.classifyAI(transaction);
       
       console.log('\n🔄 Using Rule-based Classification (AI not implemented yet)');
       console.log('=========================================================');

@@ -45,15 +45,15 @@ export class Classifier {
    * @returns ClassifierResult with category and riskLevel
    */
   public async classify(transaction: Transaction): Promise<ClassifierResult> {
-    // TODO: Implement classification logic
-    // 1. Find matching category based on title keywords
+    // @todo: Implement classification logic
+    // 1. Find matching category based on title keywords (first category with at least one matching keyword)
     // 2. Determine risk level based on amount and category thresholds, you can use existing method to do this
     // 3. Return ClassifierResult
-    
+
     throw new Error('Method not implemented');
   }
 
-  public async classifyAnthropic(transaction: Transaction): Promise<ClassifierResult> {
+  public async classifyAI(transaction: Transaction): Promise<ClassifierResult> {
     throw new Error('Method not implemented');
   }
 
@@ -63,21 +63,7 @@ export class Classifier {
    * @returns The best matching category
    */
   private findCategory(title: string): TransactionCategory {
-    const lowerTitle = title.toLowerCase();
-    let bestMatch = TransactionCategory.OTHER;
-
-    for (const rule of this.classificationRules) {
-      const hasMatch = rule.keywords.some(keyword => 
-        lowerTitle.includes(keyword.toLowerCase())
-      );
-      
-      if (hasMatch) {
-        bestMatch = rule.category;
-        break; // Use first matching category
-      }
-    }
-
-    return bestMatch;
+    throw new Error('Method not implemented');
   }
 
   /**

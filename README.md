@@ -64,34 +64,44 @@ If you want to use the AI classification features, you'll need an Anthropic API 
 npm install
 ```
 
-### Option 2: Docker
+### Option 2: Docker (No Build Step)
 
 ```bash
-# Build Docker images
-./docker-run.sh build
+# Build and run with tsx (runs TypeScript directly)
+./docker-run.sh
 
-# Run the application
-./docker-run.sh run
+# Classify transactions directly:
+./docker-run.sh "Flight to Paris" 1200
+./docker-run.sh classify "Travel" 10
 
-# Classify a transaction
-./docker-run.sh classify "Flight to Paris" 1200
+# Or manually:
+docker-compose up --build
 
-# Run tests
-./docker-run.sh test
+# Run in background:
+docker-compose up -d --build
 
-# Open shell in container
-./docker-run.sh shell
+# Stop the container:
+docker-compose down
+
+# Run a specific command:
+docker-compose run --rm rise-exercise npx tsx src/index.ts classify --title "Flight to Paris" --amount 1200
 ```
+
+**Benefits of this approach:**
+- ⚡ **Faster startup** - no build step required
+- 🔄 **Live code changes** - no need to rebuild after code changes
+- 🧹 **Cleaner workflow** - simpler development experience
+- 📦 **Smaller production images** - can exclude build tools
 
 ## Development
 
 ### Local Development
 
 ```bash
-# Build the project
+# Build the project (using esbuild)
 npm run build
 
-# Watch mode for development
+# Watch mode for development (using esbuild)
 npm run dev
 
 # Run tests
@@ -99,7 +109,12 @@ npm test
 
 # Run tests in watch mode
 npm run test:watch
-```
+
+# Run with tsx (no build step)
+npm run start:tsx
+
+# Watch mode with tsx
+npm run dev:tsx
 
 ### Docker Development
 

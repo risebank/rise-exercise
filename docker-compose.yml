@@ -1,61 +1,17 @@
 services:
-  # Production service - minimal dependencies
   rise-exercise:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: rise-exercise
     volumes:
-      # Mount source code for development
-      - ./src:/app/src
-      # Mount package files for dependency updates
-      - ./package*.json:/app/package*.json
-      # Mount dist directory for build output
-      - ./dist:/app/dist
-      # Mount environment file
-      - ./.env:/app/.env
-    working_dir: /app
-    environment:
-      - NODE_ENV=production
-      # Pass through environment variables
-      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
-    env_file:
-      - ./.env
-    # For interactive CLI usage
-    stdin_open: true
-    tty: true
-    # Command to run (can be overridden)
-    command: ["node", "dist/index.js", "--help"]
-
-  # Development service - includes all dependencies for testing
-  rise-exercise-dev:
-    build:
-      context: .
-      dockerfile: Dockerfile.dev
-    container_name: rise-exercise-dev
-    volumes:
-      # Mount source code for development
-      - ./src:/app/src
-      # Mount package files for dependency updates
-      - ./package*.json:/app/package*.json
-      # Mount dist directory for build output
-      - ./dist:/app/dist
-      # Mount tests for running tests
-      - ./src/__tests__:/app/src/__tests__
-      # Mount configuration files
-      - ./tsconfig.json:/app/tsconfig.json
-      - ./jest.config.js:/app/jest.config.js
-      # Mount environment file
-      - ./.env:/app/.env
-    working_dir: /app
+      # Mount source code for live reloading
+      - ./src:/app/src:ro
+      - ./package*.json:/app/package*.json:ro
+      - ./tsconfig.json:/app/tsconfig.json:ro
     environment:
       - NODE_ENV=development
-      # Pass through environment variables
-      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
-    env_file:
-      - ./.env
-    # For interactive CLI usage
+    # Override the CMD to use tsx watch for development
+    command: ["npx", "tsx", "watch", "src/index.ts"]
+    # Keep container running for development
     stdin_open: true
     tty: true
-    # Default command for development (watch mode)
-    command: ["npm", "run", "dev"]
