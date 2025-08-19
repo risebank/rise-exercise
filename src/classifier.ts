@@ -54,7 +54,6 @@ export class Classifier {
   }
 
   public async classifyAnthropic(transaction: Transaction): Promise<ClassifierResult> {
-    console.log(await callAnthropic('tell a joke'));
     throw new Error('Method not implemented');
   }
 
